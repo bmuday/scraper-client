@@ -19,6 +19,8 @@ export default async function handler(req, res) {
     // Launch the browser
     const browser = await puppeteer.launch({
       executablePath: "/usr/bin/chromium-browser",
+      headless: false,
+      slowMo: 250,
     });
 
     // Create a page
@@ -33,7 +35,7 @@ export default async function handler(req, res) {
     for (let i = 0; i < 2; i++) {
       let { id, name, link } = channels[i];
 
-      await page.goto(`${process.env.BASE_URL}/${link}?date=${date}}`);
+      await page.goto(`${process.env.BASE_URL}/${link}?date=${date}`);
       console.log(`${process.env.BASE_URL}/${link}?date=${date}`);
 
       scraped_infos = await page.$$eval(

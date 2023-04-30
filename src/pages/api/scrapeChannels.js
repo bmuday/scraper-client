@@ -10,7 +10,11 @@ export default async function handler(req, res) {
     }
 
     // Launch the browser
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      executablePath: "/usr/bin/chromium-browser",
+      headless: false,
+      slowMo: 250,
+    });
 
     // Create a page
     const page = await browser.newPage();
